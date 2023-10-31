@@ -20,6 +20,16 @@ const routes: Array<RouteRecordRaw> = [
       }
     ],
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login/login.vue'),
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: () => import('../views/login/signup.vue'),
+  },
 ]
 
 const router = createRouter({

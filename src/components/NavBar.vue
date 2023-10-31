@@ -2,16 +2,27 @@
   <div class="init">
     <a-layout class="layout" theme="light">
       <div class="left">
-        <div class="logo">
-          <img src="../assets/logo.png" />
-        </div>
+        <router-link to="/home">
+          <div class="logo">
+            <img src="../assets/logo.png" />
+          </div>
+        </router-link>
         <a-menu class="menu" v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
           <router-link v-for="item in navBarList" :key="item.path" :to="item.path">
             <a-menu-item :key="item.path">{{ item.name }}</a-menu-item>
           </router-link>
         </a-menu>
       </div>
-      <div class="right-control">用户中心</div>
+      <div class="right-control">
+        <a-input-search class="search" v-model:value="value" placeholder="搜索" @search="onSearch" />
+        <router-link to="/login">
+          <div class="m-l-8">登录</div>
+        </router-link>
+        <div class="m-l-8">或</div>
+        <router-link to="/signup">
+          <div class="m-l-8">注册</div>
+        </router-link>
+      </div>
     </a-layout>
   </div>
 </template>
@@ -25,10 +36,18 @@ const navBarList = store.navBarList
 const route = useRoute()
 
 const selectedKeys = ref<string[]>([route.path]);
+const value = ref<string>('');
+const onSearch = (searchValue: string) => {
+  console.log('use value', searchValue);
+  console.log('or use this.value', value.value);
+};
 
 </script>
 
 <style lang='less' scoped>
+.m-l-8 {
+  margin-left: 8px;
+}
 .init {
   display: flex;
   flex-direction: row;
@@ -67,7 +86,16 @@ const selectedKeys = ref<string[]>([route.path]);
 
 
   .right-control {
-    width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    // width: 400px;
+    padding: 0 20px;
+    .search {
+      width: 200px;
+    }
   }
 }
 </style>
