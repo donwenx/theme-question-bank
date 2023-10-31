@@ -13,13 +13,13 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/home/index.vue'),
         name: 'home',
       },
+      {
+        path: '/problemset',
+        name: 'problemset',
+        component: () => import('../views/problemset/index.vue')
+      }
     ],
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue')
-  }
 ]
 
 const router = createRouter({

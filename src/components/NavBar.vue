@@ -6,9 +6,9 @@
           <img src="../assets/logo.png" />
         </div>
         <a-menu class="menu" v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal">
-          <a-menu-item key="1">nav 1</a-menu-item>
-          <a-menu-item key="2">nav 2</a-menu-item>
-          <a-menu-item key="3">nav 3</a-menu-item>
+          <router-link v-for="item in navBarList" :key="item.path" :to="item.path">
+            <a-menu-item :key="item.path">{{ item.name }}</a-menu-item>
+          </router-link>
         </a-menu>
       </div>
       <div class="right-control">用户中心</div>
@@ -17,8 +17,14 @@
 </template>
 
 <script lang='ts' setup>
+import { useHomeStore } from '@/store/modules/home';
 import { ref } from 'vue';
-const selectedKeys = ref<string[]>(['2']);
+import { useRoute } from 'vue-router';
+const store = useHomeStore()
+const navBarList = store.navBarList
+const route = useRoute()
+
+const selectedKeys = ref<string[]>([route.path]);
 
 </script>
 
@@ -30,6 +36,7 @@ const selectedKeys = ref<string[]>(['2']);
   width: 100%;
   background: #fff;
 }
+
 .layout {
   display: flex;
   flex-direction: row;
