@@ -147,6 +147,7 @@ onMounted(() => {
 .problemset {
   background: #fff;
   border-radius: 8px;
+  padding: 20px;
 
   .dropdown {
     display: flex;
