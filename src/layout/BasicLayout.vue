@@ -4,7 +4,7 @@
     <div class="content">
       <router-view></router-view>
     </div>
-    <Footer />
+    <Footer class="footer" />
   </a-layout>
 </template>
 
@@ -18,14 +18,16 @@ import Footer from '../components/Footer.vue';
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   .navbar {
   }
   .content {
+    flex: 1;
     max-width: 1200px;
     width: 100%;
-    height: 100%;
-    min-height: 100vh;
     padding: 20px 0;
+  }
+  .footer {
   }
 }
 </style>

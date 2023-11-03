@@ -17,18 +17,23 @@ const routes: Array<RouteRecordRaw> = [
         path: '/problemset',
         name: 'problemset',
         component: () => import('../views/problemset/index.vue')
-      }
+      },
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('../views/login/login.vue'),
+      },
+      {
+        path: '/signup',
+        name: 'signup',
+        component: () => import('../views/login/signup.vue'),
+      },
+      {
+        path: '/reset',
+        name: 'reset',
+        component: () => import('../views/login/reset.vue'),
+      },
     ],
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/login/login.vue'),
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: () => import('../views/login/signup.vue'),
   },
 ]
 

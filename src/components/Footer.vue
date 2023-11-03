@@ -1,14 +1,14 @@
 <template>
-  <a-layout class="layout">
+  <div class="footer-container">
     theme-question-bank ©2023 Created by DonWen
-  </a-layout>
+  </div>
 </template>
 
 <script lang='ts' setup>
 </script>
 
 <style lang="less" scoped>
-.layout {
+.footer-container {
   width: 100%;
   padding: 100px 0;
   text-align: center;
