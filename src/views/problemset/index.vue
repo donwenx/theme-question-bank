@@ -38,7 +38,7 @@
           </a-menu>
         </template>
         <a-button>
-          设置
+          <SettingOutlined />
         </a-button>
 
       </a-dropdown>
@@ -50,17 +50,25 @@
         <template #headerCell="{ column }">
           <template v-if="column.key === 'name'">
             <span>
-              <smile-outlined />
-              Name
+              题目
             </span>
           </template>
         </template>
 
         <template #bodyCell="{ column, record }">
+          <template v-if="column.key === 'state'">
+            <div v-if="record.state === 1">已完成</div>
+            <div v-if="record.state === 0"></div>
+          </template>
           <template v-if="column.key === 'name'">
-            <a>
+            <router-link to="/home">
               {{ record.name }}
-            </a>
+            </router-link>
+          </template>
+          <template v-else-if="column.key === 'level'">
+            <a-tag :bordered="false" v-if="record.level === 1" color="green">简单</a-tag>
+            <a-tag :bordered="false" v-if="record.level === 2" color="orange">中等</a-tag>
+            <a-tag :bordered="false" v-if="record.level === 3" color="red">困难</a-tag>
           </template>
           <template v-else-if="column.key === 'tags'">
             <span>
@@ -70,18 +78,6 @@
               </a-tag>
             </span>
           </template>
-          <template v-else-if="column.key === 'action'">
-            <span>
-              <a>Invite 一 {{ record.name }}</a>
-              <a-divider type="vertical" />
-              <a>Delete</a>
-              <a-divider type="vertical" />
-              <a class="ant-dropdown-link">
-                More actions
-                <down-outlined />
-              </a>
-            </span>
-          </template>
         </template>
       </a-table>
     </div>
@@ -89,8 +85,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, reactive } from 'vue';
-import { SmileOutlined, DownOutlined, CheckOutlined, SearchOutlined } from '@ant-design/icons-vue';
+import { ref, watch, reactive, onMounted } from 'vue';
+import { DownOutlined, SettingOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
 import { useProblemsetStore } from '@/store/modules/problemset';
 
@@ -99,6 +95,8 @@ const store = useProblemsetStore()
 const menuList = store.menuName
 const handleMenuClick: MenuProps['onClick'] = e => {
   console.log('click', e, e.key);
+  // 更新查询新数据
+  updateData()
 };
 
 
@@ -119,58 +117,20 @@ const onChildRandom = (value: string) => {
   console.log(value)
 }
 
+
 // 表格
+const columns = store.tableColumns
+const data = ref<any[]>([])
 
-const columns = [
-  {
-    name: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-  },
-];
+const updateData = () => {
+  // 发起更新请求
+  data.value = store.tableInfo
+  console.log(data)
+}
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+onMounted(() => {
+  updateData()
+})
 </script>
 
 <style lang="less" scoped>

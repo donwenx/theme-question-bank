@@ -46,6 +46,59 @@ export const useProblemsetStore = defineStore('app-problemset', {
         ],
       },
     ],
+    tableColumns: [
+      {
+        title: '状态',
+        dataIndex: 'state',
+        key: 'state'
+      },
+      {
+        name: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: '难度',
+        dataIndex: 'age',
+        key: 'age',
+      },
+      {
+        title: '级别',
+        dataIndex: 'level',
+        key: 'level'
+      },
+      {
+        title: 'Tags',
+        key: 'tags',
+        dataIndex: 'tags',
+      },
+    ],
+    tableInfo: [
+      {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        state: 0,
+        level: 3,
+        tags: ['数组', '字符串'],
+      },
+      {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        state: 1,
+        level: 1,
+        tags: ['loser'],
+      },
+      {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        state: 1,
+        level: 2,
+        tags: ['cool', 'teacher'],
+      },
+    ],
   }),
   getters: {},
   actions: {},
