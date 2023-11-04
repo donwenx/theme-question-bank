@@ -33,6 +33,16 @@ const routes: Array<RouteRecordRaw> = [
         name: 'reset',
         component: () => import('../views/login/reset.vue'),
       },
+      {
+        path: '/user',
+        name: 'user',
+        component: () => import('../views/user/index.vue'),
+      },
+      {
+        path: '/progress',
+        name: 'progress',
+        component: () => import('../views/user/progress.vue'),
+      },
     ],
   },
 ]

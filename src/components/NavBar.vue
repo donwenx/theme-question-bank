@@ -15,13 +15,20 @@
       </div>
       <div class="right-control">
         <a-input-search class="search" v-model:value="value" placeholder="搜索" @search="onSearch" />
-        <router-link to="/login">
-          <div class="m-l-8">登录</div>
-        </router-link>
-        <div class="m-l-8">或</div>
-        <router-link to="/signup">
-          <div class="m-l-8">注册</div>
-        </router-link>
+        <div v-if="isLogin" class="login">
+          <router-link to="/login">
+            <div class="m-l-8">登录</div>
+          </router-link>
+          <div class="m-l-8">或</div>
+          <router-link to="/signup">
+            <div class="m-l-8">注册</div>
+          </router-link>
+        </div>
+        <div v-if="!isLogin" class="user">
+          <router-link to="/user">
+            个人中心
+          </router-link>
+        </div>
       </div>
     </a-layout>
   </div>
@@ -34,6 +41,7 @@ import { useRoute } from 'vue-router';
 const store = useHomeStore()
 const navBarList = store.navBarList
 const route = useRoute()
+const isLogin = ref(false)
 
 const selectedKeys = ref<string[]>([route.path]);
 const value = ref<string>('');
@@ -48,6 +56,7 @@ const onSearch = (searchValue: string) => {
 .m-l-8 {
   margin-left: 8px;
 }
+
 .init {
   display: flex;
   flex-direction: row;
@@ -93,8 +102,16 @@ const onSearch = (searchValue: string) => {
     align-items: center;
     // width: 400px;
     padding: 0 20px;
+
     .search {
       width: 200px;
+    }
+    .login {
+      display: flex;
+      flex-direction: row;
+    }
+    .user {
+      margin-left: 8px;
     }
   }
 }
