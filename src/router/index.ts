@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import layout from '../layout/BasicLayout.vue'
+import userLayout from '../layout/UserLayout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -37,11 +38,24 @@ const routes: Array<RouteRecordRaw> = [
         path: '/user',
         name: 'user',
         component: () => import('../views/user/index.vue'),
-      },
+      },  
       {
-        path: '/progress',
-        name: 'progress',
-        component: () => import('../views/user/progress.vue'),
+        path: '/',
+        name: 'userLayout',
+        component: userLayout,
+        redirect: '/home',
+        children: [
+          {
+            path: '/progress',
+            name: 'progress',
+            component: () => import('../views/user/progress.vue'),
+          },
+          {
+            path: '/collection',
+            name: 'collection',
+            component: () => import('../views/user/collection.vue'),
+          },
+        ],
       },
     ],
   },
