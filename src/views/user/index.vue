@@ -57,7 +57,7 @@
 <script lang="ts" setup>
 import { useUserStore } from '@/store/modules/user';
 import { RightOutlined } from '@ant-design/icons-vue';
-import { ref, h } from 'vue';
+import { ref } from 'vue';
 
 const user = useUserStore().userInfo
 const activeKey = ref('1');
@@ -65,34 +65,20 @@ const activeKey = ref('1');
 
 const columns = [
   {
-    name: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: '查看时间',
+    dataIndex: 'updateTime',
+    key: 'updateTime',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: '题目',
+    dataIndex: 'title',
+    key: 'title',
   },
 ];
 
-const data = [
-  {
-    id: '1',
-    name: 'John Brown',
-    age: 32,
-  },
-  {
-    id: '2',
-    name: 'Jim Green',
-    age: 42,
-  },
-  {
-    id: '3',
-    name: 'Joe Black',
-    age: 32,
-  },
-];
+const data = ref()
+data.value = user.record
+
 </script>
 
 <style lang="less" scoped>

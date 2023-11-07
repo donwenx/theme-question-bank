@@ -11,7 +11,6 @@
         收藏夹
       </div>
 
-      <!-- :class="'active'" -->
       <div class="list" :class="{ 'active': isActive === '/progress' }" to="progress" @click="onClickList('/progress')">
         <PieChartOutlined class="icon" />
         历史记录
@@ -47,6 +46,7 @@ const onClickList = (path: string) => {
   flex-direction: row;
 
   .user {
+    margin-right: 20px;
     display: flex;
     flex-direction: column;
     width: 240px;
@@ -82,6 +82,7 @@ const onClickList = (path: string) => {
       padding: 14px 18px;
       border-top: 1px solid rgba(229, 229, 229, 1);
       color: #3c3c4399;
+      border-radius: 0.5rem;
 
       .icon {
         margin-right: 8px;
@@ -93,6 +94,7 @@ const onClickList = (path: string) => {
         background: #edeef0;
       }
     }
+
     .active {
       color: rgba(10, 132, 255, 1);
       background: #edeef0;
