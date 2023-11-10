@@ -57,6 +57,11 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: '/collection/:id',
+        name: 'collectionDetails',
+        component: () => import('../views/user/collectionDetails.vue'),
+      },
     ],
   },
 ]
