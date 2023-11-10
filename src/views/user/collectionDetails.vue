@@ -1,7 +1,10 @@
 <template>
   <div class="collectionDetails">
     <div class="head">
-      <div class="text">前端学习</div>
+      <div class="text">
+        <div class="title">{{ collection.title }}</div>
+        <div class="describe">{{ collection.describe }}</div>
+      </div>
       <div class="operate">
         <div class="edit" @click.stop="showModal">
           <EditOutlined class="icon" />编辑
@@ -29,21 +32,21 @@ import { useCollectStore } from '@/store/modules/collect';
 const route = useRoute()
 const params = route.params
 const collect = useCollectStore()
-const collectionDetails = collect.collectionDetails[params.id as any as number]
+const collection = collect.collect[params.id as any as number]
 
 // 编辑弹窗
 const showModal = (item: any) => {
   open.value = true;
   nextTick(() => {
     edit.value.resetState()
-    formState.title = collectionDetails.title
-    formState.describe = collectionDetails.describe
-    formState.public = collectionDetails.public
-    formState.id = collectionDetails.id
+    formState.title = collection.title
+    formState.describe = collection.describe
+    formState.public = collection.public
+    formState.id = collection.id
   })
 };
 const onClickDelete = () => {
-  console.log('click delete', collectionDetails.id)
+  console.log('click delete', collection.id)
 }
 // 新增弹窗
 const open = ref<boolean>(false);
@@ -89,6 +92,11 @@ onMounted(() => {
     .text {
       font-size: 1.5rem;
       font-weight: 600;
+      .title {}
+      .describe {
+        font-size: 1rem;
+        color: #999;
+      }
     }
 
     .operate {

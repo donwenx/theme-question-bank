@@ -1,5 +1,5 @@
 <template>
-  <div class="progress">
+  <div class="record">
     <div class="container">
       <div class="head">
         <a-input-search class="search" v-model:value="searchValue" placeholder="搜索题目" @search="onSearch" />
@@ -19,10 +19,12 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useRecordStore } from '@/store/modules/record';
 import { useUserStore } from '@/store/modules/user';
 import { ref } from 'vue';
 
 const user = useUserStore().userInfo
+const record = useRecordStore().record
 
 const searchValue = ref<string>('');
 const onSearch = () => {
@@ -52,10 +54,10 @@ const columns = [
   },
 ];
 const data = ref()
-data.value = user.record
+data.value = record
 </script>
 <style lang="less" scoped>
-.progress {
+.record {
   box-sizing: border-box;
   flex: 1;
   padding: 20px;

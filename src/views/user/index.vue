@@ -15,7 +15,7 @@
         历史记录
         <a-tabs v-model:activeKey="activeKey">
           <template #rightExtra>
-            <router-link to="progress">
+            <router-link to="record">
               <a-button type="text" v-if="activeKey === '1'" size="small" class="btn">
                 所有记录
                 <RightOutlined style="font-size: 0.8em;" />
@@ -55,11 +55,13 @@
 </template>
 
 <script lang="ts" setup>
+import { useRecordStore } from '@/store/modules/record';
 import { useUserStore } from '@/store/modules/user';
 import { RightOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
 
 const user = useUserStore().userInfo
+const record = useRecordStore().record
 const activeKey = ref('1');
 
 
@@ -77,7 +79,7 @@ const columns = [
 ];
 
 const data = ref()
-data.value = user.record
+data.value = record
 
 </script>
 

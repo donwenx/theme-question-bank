@@ -46,9 +46,9 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/home',
         children: [
           {
-            path: '/progress',
-            name: 'progress',
-            component: () => import('../views/user/progress.vue'),
+            path: '/record',
+            name: 'record',
+            component: () => import('../views/user/record.vue'),
           },
           {
             path: '/collection',

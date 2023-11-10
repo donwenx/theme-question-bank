@@ -35,10 +35,10 @@ import { Modal } from 'ant-design-vue';
 import { createVNode, nextTick, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import CollectionEdit from './components/CollectionEdit.vue'
+import { useCollectStore } from '@/store/modules/collect';
 
 const router = useRouter()
-const user = useUserStore()
-const collection = user.userInfo.collect
+const collection = useCollectStore().collect
 
 const onClickDelete = (id: number) => {
   Modal.confirm({

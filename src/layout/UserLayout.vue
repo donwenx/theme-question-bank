@@ -11,7 +11,7 @@
         收藏夹
       </div>
 
-      <div class="list" :class="{ 'active': isActive === '/progress' }" to="progress" @click="onClickList('/progress')">
+      <div class="list" :class="{ 'active': isActive === '/record' }" to="record" @click="onClickList('/record')">
         <PieChartOutlined class="icon" />
         历史记录
       </div>
