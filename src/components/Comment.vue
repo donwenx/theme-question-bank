@@ -1,17 +1,36 @@
 <template>
   <div class="comment-list">
-    <div class="comment-item" v-for="(item, index) in info" :key="item.id">
+    <div class="comment-item" v-for="(item, index) in list" :key="item.id">
       <div class="comment-avatar">
         <img src="/img/avatar.jpg" alt="">
       </div>
       <div class="comment-wrapper">
-        <div class="comment-header">{{ item.name }}</div>
-        <div class="comment-content">{{ item.comment }}</div>
+        <div v-if="level === 1">
+          <div class="comment-header">
+            <div>
+              {{ item.name }}
+            </div>
+            <div v-if="item.author" class="author-tag">
+              <a-tag color="blue" :bordered="false">作者</a-tag>
+            </div>
+          </div>
+          <div class="comment-content">{{ item.comment }}</div>
+        </div>
+        <div v-else>
+          <div class="comment-content">
+            {{ item.name }}
+            <div class="author-tag" v-if="item.author">
+              <a-tag color="blue" :bordered="false">作者</a-tag>
+            </div> : {{ item.comment }}
+          </div>
+        </div>
         <div class="comment-action">
           <div class="comment-action-l">
             <div class="action-time">{{ item.time }}</div>
             <div class="action-digg" @click="onClickLike(item, index)">
-              <LikeOutlined class="action-icon-mr4 " :class="{ 'action-text': likeClick.get(index) }" />{{ item.like }}
+              <LikeOutlined class="action-icon-mr4 " :class="{ 'action-text': likeClick.get(index) }" />
+              <div v-if="item.like">{{ item.like }}</div>
+              <div v-if="!item.like">回复</div>
             </div>
             <div class="action-reply" :class="{ 'action-text': replyClick.get(index) }"
               @click.stop="onClickReply(item, index)">
@@ -30,30 +49,21 @@
         </div>
         <!-- 回复内容 -->
         <div class="comment-reply-wrapper">
-          <!-- <Comment></Comment> -->
+          <Comment :list="item.children"></Comment>
 
           <!-- 查看更多 -->
           <div class="top-has-more">查看全部 {{ item.replyCount }} 条回复</div>
         </div>
       </div>
     </div>
-    <div class="comment-item">第2条</div>
   </div>
 </template>
 <script lang='ts' setup>
 import { EllipsisOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
-import { reactive, ref } from 'vue';
-let info = reactive([
-  {
-    id: '1',
-    name: 'dxkite',
-    comment: '收藏=学会',
-    time: '2023-12-09',
-    like: 123,
-    replyCount: 10,
-    children: [],
-  },
-])
+import { reactive, ref, defineProps } from 'vue';
+const props = defineProps(['list', 'level'])
+const list = reactive(props.list || [])
+const level = ref(props.level)
 let likeClick = ref<Map<number, boolean>>(new Map())
 let replyClick = ref<Map<number, boolean>>(new Map())
 
@@ -67,11 +77,11 @@ const onClickReply = (item: unknown, index: number) => {
 }
 const onClickLike = (item: unknown, index: number) => {
   if (likeClick.value.get(index) === true) {
-    info[index].like--
+    list[index].like--
     likeClick.value.set(index, false)
     return
   }
-  info[index].like++
+  list[index].like++
   likeClick.value.set(index, true)
   console.log('点赞', item)
 }
@@ -82,7 +92,6 @@ const onClickLike = (item: unknown, index: number) => {
 }
 
 .comment-list {
-  margin-top: 20px;
 
   .comment-item {
     display: flex;
@@ -106,7 +115,12 @@ const onClickLike = (item: unknown, index: number) => {
     .comment-wrapper {
       flex: 1;
 
+      .author-tag {
+        margin-left: 4px;
+      }
+
       .comment-header {
+        display: flex;
         font-size: 16px;
         line-height: 24px;
         color: #515767;
@@ -124,24 +138,6 @@ const onClickLike = (item: unknown, index: number) => {
         line-height: 28px;
         font-weight: 400;
 
-        .user-info {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin-right: 4px;
-
-          .user-name {
-            color: #515767;
-            font-size: 14px;
-            font-weight: 400;
-            margin-right: 4px;
-            cursor: pointer;
-          }
-
-          .author-tag {
-            margin-left: 4px;
-          }
-        }
       }
 
       .comment-action {

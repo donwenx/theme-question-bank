@@ -60,7 +60,7 @@
               最热</div>
           </div>
           <!-- 评论内容 -->
-          <Comment></Comment>
+          <Comment :list="list" :level="1"></Comment>
         </div>
       </div>
     </div>
@@ -74,8 +74,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { StarOutlined, StarFilled, CommentOutlined, VerticalAlignTopOutlined, EllipsisOutlined, EyeOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
-import { onMounted, ref } from 'vue';
+import { StarOutlined, StarFilled, CommentOutlined, VerticalAlignTopOutlined, EyeOutlined, } from '@ant-design/icons-vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Editor from '../../components/Editor.vue'
 import Comment from '../../components/Comment.vue'
@@ -90,6 +90,28 @@ const numberStyle = ref({
   background: '#c2c8d1',
   color: '#fff',
 })
+let list = reactive([
+  {
+    id: '1',
+    name: 'dxkite',
+    comment: '收藏=学会',
+    time: '2023-12-09',
+    like: 123,
+    replyCount: 10,
+    author: true,
+    children: [
+      {
+        id: '2',
+        name: 'dxkite',
+        comment: '收藏=学会',
+        time: '2023-12-09',
+        like: 0,
+        replyCount: 0,
+        author: false,
+      },
+    ],
+  },
+])
 
 const onClickCollect = () => {
   isCollect.value = !isCollect.value
@@ -241,6 +263,7 @@ onMounted(() => {
         .list-header {
           display: flex;
           flex-direction: row;
+          margin-bottom: 20px;
 
           .list-header-item {
             font-size: 16px;
