@@ -127,7 +127,7 @@ const onClickLoginOut = () => {
     }
 
     .menu {
-      lineHeight: '64px'
+      // lineHeight: '64px'
     }
   }
 
