@@ -7,7 +7,7 @@
       <div class="head-info">
         <div class="title">{{ user.name }}</div>
         <div class="sub-title">ID: {{ user.id }}</div>
-        <div class="bio">简介: {{ user.dio }}</div>
+        <div class="bio">简介: {{ user.bio }}</div>
       </div>
     </div>
     <div class="container">

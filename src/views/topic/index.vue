@@ -24,7 +24,12 @@
         <div class="header">
           <div class="title">中级前端必备知识点</div>
           <div class="sub-title">
-            <div class="sub-title-item sub-title-name">作者namexxxxxxxxxxxxxxxxxxxxxx</div>
+            <div class="sub-title-item sub-title-name">
+              <a-tooltip>
+                <template #title>作者namexxxxxxxxxxxxxxxxxxxxxx</template>
+                作者namexxxxxxxxxxxxxxxxxxxxxx
+              </a-tooltip>
+            </div>
             <div class="sub-title-item">2023-10-19</div>
             <div class="sub-title-item">
               <EyeOutlined class="sub-title-item-icon" />5,468
@@ -65,9 +70,7 @@
       </div>
     </div>
     <div class="topic-r">
-      <div class="user">
-        作者信息
-      </div>
+      <UserCard></UserCard>
       <div class="directory">目录</div>
       <div class="related">相关推荐</div>
     </div>
@@ -79,6 +82,7 @@ import { onMounted, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Editor from '../../components/Editor.vue'
 import Comment from '../../components/Comment.vue'
+import UserCard from './components/UserCard.vue'
 
 const route = useRoute()
 

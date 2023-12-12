@@ -3,7 +3,7 @@
     <div class="user">
       <div class="user-info">
         <div class="avatar"><img :src="user.avatar" alt=""></div>
-        <div class="bio">简介: {{ user.dio }}</div>
+        <div class="bio">简介: {{ user.bio }}</div>
       </div>
 
       <div class="list" :class="{ 'active': isActive === '/collection' }" @click="onClickList('/collection')">

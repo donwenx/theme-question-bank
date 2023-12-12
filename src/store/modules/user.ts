@@ -6,7 +6,7 @@ export const useUserStore = defineStore('app-user', {
     userInfo: {
       id: 100,
       name: 'name',
-      dio: '简介内容',
+      bio: '简介内容',
       avatar: '/img/avatar.jpg',
     },
   }),
